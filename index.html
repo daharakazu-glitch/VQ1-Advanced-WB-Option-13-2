@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Quest Advanced - Option 13-2</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Serif:wght@700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        .font-dancing { font-family: 'Dancing Script', cursive; }
+        .font-serif-custom { font-family: 'Noto Serif', serif; }
+        .font-times { font-family: 'Times New Roman', Times, serif; }
+
+        .animate-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hidden-tab { display: none !important; }
+        .active-tab { display: block !important; }
+        .hidden-content { display: none; }
+    </style>
+</head>
+<body class="bg-gray-100 selection:bg-blue-200 text-gray-900 min-h-screen">
+    
+    <div class="p-4 md:p-8 max-w-3xl mx-auto">
+        <!-- Header -->
+        <header class="mb-10 p-6 md:p-8 rounded-2xl shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+            <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-20 pointer-events-none" style="background: radial-gradient(ellipse at center bottom, rgba(255,255,255,0.8) 0%, transparent 70%);"></div>
+            <div class="absolute -bottom-10 -right-10 w-64 h-64 border-[40px] border-blue-400 rounded-full opacity-10 pointer-events-none"></div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-between relative z-10">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <h1 class="text-6xl md:text-[5rem] font-bold text-white leading-none drop-shadow-md font-dancing" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                        <span class="block mb-[-0.2em] relative left-[-10px]">Vision</span>
+                        <span class="block ml-6 md:ml-12">Quest</span>
+                    </h1>
+                </div>
+
+                <div class="flex flex-col items-center md:items-start text-white">
+                    <div class="text-sm md:text-base font-sans font-bold tracking-[0.2em] opacity-90 mb-1 drop-shadow-sm">
+                        論理・表現 Ⅰ
+                    </div>
+                    <div class="text-xl md:text-2xl font-sans font-medium tracking-widest opacity-90 drop-shadow-sm">
+                        Advanced
+                    </div>
+                    <div class="text-[2rem] md:text-[2.5rem] mt-3 tracking-[0.1em] font-serif-custom uppercase drop-shadow-md"
+                         style="color: transparent; -webkit-text-stroke: 1px white; text-shadow: 0px 0px 8px rgba(255,255,255,0.4);">
+                        Workbook
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center relative z-10 mt-6 md:mt-2">
+                <span class="inline-block bg-white text-[#1e3a8a] px-5 py-2 rounded-full font-black text-sm tracking-widest shadow-md border border-blue-100">
+                    Option 13-2 代名詞 ②
+                </span>
+            </div>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <div class="flex flex-col md:flex-row justify-center gap-2 mb-8 bg-white p-1.5 rounded-xl shadow-sm border border-gray-200 w-full md:w-fit mx-auto relative z-20">
+            <button id="tab-btn-examples" onclick="switchTab('examples')" class="flex items-center justify-center px-6 py-3 rounded-lg font-bold text-sm transition-all bg-[#1e3a8a] text-white shadow-md">
+                <i class="ph ph-book-open text-lg mr-2"></i> 例文・表現を学ぶ
+            </button>
+            <button id="tab-btn-exercises" onclick="switchTab('exercises')" class="flex items-center justify-center px-6 py-3 rounded-lg font-bold text-sm transition-all text-gray-500 hover:text-[#1e3a8a] hover:bg-[#f0f4f9]">
+                <i class="ph ph-pen-nib text-lg mr-2"></i> Exercises
+            </button>
+        </div>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            
+            <!-- Examples View -->
+            <div id="view-examples" class="active-tab animate-in">
+                <div class="bg-[#eef2f7] border-l-4 border-[#1e3a8a] p-4 rounded-r-lg shadow-sm mb-6">
+                    <p class="text-[#1e3a8a] text-base font-bold tracking-wide">
+                        Option 13-2 の重要例文です。スピーカーでお手本を聞き、マイクで発音練習をしましょう。
+                    </p>
+                </div>
+                <div id="examples-container"></div>
+            </div>
+
+            <!-- Exercises View -->
+            <div id="view-exercises" class="hidden-tab animate-in">
+                <div class="bg-[#fff4eb] border-l-4 border-[#d97706] p-4 rounded-r-lg mb-6 shadow-sm">
+                    <p class="text-[#b45309] text-base font-bold tracking-wide">
+                        解答を入力し「答え合わせ」を押してください。各問題の最後に発音練習ができます。
+                    </p>
+                </div>
+                <div id="exercises-container"></div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-16 text-center text-sm text-gray-400 pb-8 font-medium">
+            <p>※音声認識はChrome推奨。マイク許可が必要です。</p>
+        </footer>
+    </div>
+
+    <script>
+        // ==========================================
+        // Data Configuration (Option 13-2)
+        // ==========================================
+        const examplesData = [
+            // A one/some/anyの用法
+            { id: 1, verb: "one / ones", meaning: "電池を新しいものに交換した。 / この青いりんごはあの赤いりんごより甘い。", example: "I changed the battery for a new one. / These green apples taste sweeter than those red ones.", highlight: "one / ones", category: "A one / some / any の用法", explanation: "【one】「(不特定の) 1つ [1人]」を表し、前に出てきた数えられる名詞の繰り返しを避けるために使います。複数形は ones となります。" },
+            { id: 2, verb: "some / any", meaning: "りんごが安かったので、いくつか買った。/ 私には兄弟も姉妹もいない。", example: "The apples were cheap, so I bought some. / I don't have any brothers or sisters.", highlight: "some / any", category: "A one / some / any の用法", explanation: "【some / any】someは「(数が)いくつか。(量が)いくらか」あることを表し主に肯定文で使います。anyも同じ意味ですが、主に疑問文や否定文で使います。" },
+            
+            // B another / other の用法
+            { id: 3, verb: "another", meaning: "彼は1杯のコーヒーを飲み、もう1杯注文した。", example: "He drank a cup of coffee and ordered another.", highlight: "another", category: "B another / other の用法", explanation: "【another】「(不特定の)もう1つ [1人]」を表します。単数扱いです。" },
+            { id: 4, verb: "the other", meaning: "彼女は猫を2匹飼っています。1匹は黒で、もう1匹は白です。", example: "She has two cats. One is black, and the other is white.", highlight: "the other", category: "B another / other の用法", explanation: "【the other】2つあるうちの、「(特定の)もう一方」を表します。" },
+            { id: 5, verb: "the others", meaning: "彼女は猫を3匹飼っています。1匹は黒で、残りは全部白です。", example: "She has three cats. One is black, and the others are white.", highlight: "the others", category: "B another / other の用法", explanation: "【the others】複数あるうちの、「(特定の)ほかの残り全部」を表します。" },
+            { id: 6, verb: "others", meaning: "彼女は猫をたくさん飼っています。黒もいれば、白もいます。", example: "She has many cats. Some are black, and others are white.", highlight: "others", category: "B another / other の用法", explanation: "【others】全体が特定されていない中で「(不特定の)ほかのいくつか」を表します。Some 〜, and others ...「〜もいれば･･･もいる」の形でよく使われます。" },
+
+            // C both/all/each/ either / neither の用法
+            { id: 7, verb: "both / all", meaning: "私には2人の姉妹がいる。2人とも結婚している。/ 私には3人いとこがいる。みんな女の子だ。", example: "I have two sisters. Both are married. / I have three cousins. All are girls.", highlight: "Both / All", category: "C both / all / each / either / neither", explanation: "【both / all】bothは2つのうち「両方(とも)」。allは3つ以上のうち「すべて」を表します。" },
+            { id: 8, verb: "each", meaning: "彼女は猫を3匹飼っていますが、それぞれ色が違います。", example: "She has three cats and each is a different color.", highlight: "each", category: "C both / all / each / either / neither", explanation: "【each】複数のうち「それぞれ、各自」を表します。単数扱いになります。" },
+            { id: 9, verb: "either / neither", meaning: "「紅茶とコーヒーどちらがよろしいですか。」「どちらでも結構です。」/「どちらもいりません。」", example: "“Would you like tea or coffee?” “Either is fine.” / “Neither, thanks.”", highlight: "Either / Neither", category: "C both / all / each / either / neither", explanation: "【either / neither】eitherは2つのうち「どちらか一方、どちらでも」。neitherは「どちらも〜ない」を表します。いずれも単数扱いです。" }
+        ];
+
+        const exercisesData = [
+            // Exercise 1: 穴埋め
+            { id: 101, sectionInstruction: "1. 日本語に合うように、(　)に適切な語を入れなさい。A, B", type: "穴埋め", hint: "ケーキがいくつかあります。あなたはどれがいいですか。", exercise: "We have (     ) cakes. Which (     ) would you like?", answer: "some / one", accepts: ["several / one"], fullExercise: "We have some cakes. Which one would you like?", explanation: "肯定文で「いくつか」あることを表す場合 some を使います（several も可）。数えられる名詞の繰り返しを避ける場合、不定代名詞 one 「(不特定の)1つ」を使います。" },
+            { id: 102, type: "穴埋め", hint: "新しいノートがないので、1冊買わなければならない。", exercise: "I don't have (     ) new notebooks, so I have to buy (     ).", answer: "any / one", fullExercise: "I don't have any new notebooks, so I have to buy one.", explanation: "否定文で「少しも〜ない」を表す場合、not~anyを使います。a notebook の代用として one を使います。" },
+            { id: 103, type: "穴埋め", hint: "これらのイスをいくつか使ってもいいですか。", exercise: "Can we use (     ) of these chairs?", answer: "some", fullExercise: "Can we use some of these chairs?", explanation: "疑問文では any を使うのが基本ですが、勧誘や依頼など「yes」という肯定の答えが期待される疑問文の場合は any ではなく some を使います。" },
+            { id: 104, type: "穴埋め", hint: "冬に葉が落ちる木もあれば、ずっと葉が緑である木もある。", exercise: "(     ) trees lose their leaves in winter, and (     ) are always green.", answer: "Some / others", fullExercise: "Some trees lose their leaves in winter, and others are always green.", explanation: "〈Some 〜, others ...〉「〜もいれば･･･もいる」。others は3つ以上のうち、「(不特定の)ほかのいくつか」を表します。" },
+            { id: 105, type: "穴埋め", hint: "このシャツは私の好みに合いません。ほかのものを見せてもらえますか。", exercise: "This shirt isn't to my taste. Could you show me (     )?", answer: "another", fullExercise: "This shirt isn't to my taste. Could you show me another?", explanation: "3つ以上のもののうち、1つを取り上げた後、別の1つを取り上げて「(不特定の)ほかの1つ」の意味を表す場合、another を使います。" },
+
+            // Exercise 2: 全文入力または会話文補完
+            { id: 201, sectionInstruction: "2. 日本語に合うように、下線部に適切な語句を補いなさい。(全文または会話の返答を入力してください) B, C", type: "英作文", hint: "「午前と午後のどちらが都合がいいですか。」「どちらでもいいです。」", exercise: "\"Which is more convenient for you, morning or afternoon?\"", answer: "Either is OK.", fullExercise: "Which is more convenient for you, morning or afternoon? Either is OK.", explanation: "2つある選択肢のうち、「どちらでも、どちらか一方」には either を使います。either は単数扱いです。" },
+            { id: 202, type: "英作文", hint: "その猫の片方の目は緑色で、もう一方の目は茶色だ。", exercise: "( One eye of the cat is green and ... )", answer: "One eye of the cat is green and the other is brown.", accepts: ["One eye of the cat is green and the other brown."], fullExercise: "One eye of the cat is green and the other is brown.", explanation: "2つあるもののうち1つを取り上げた後、残った1つを示す場合、the other 「(特定の)もう一方」を使います。" },
+            { id: 203, type: "英作文", hint: "彼の両親ともに彼を誇りに思っている。", exercise: "( ... take pride in him. )", answer: "Both of his parents take pride in him.", accepts: ["Both his parents take pride in him."], fullExercise: "Both of his parents take pride in him.", explanation: "「~の両方」は both (of) ~ を使います。both は複数扱いです。" },
+            { id: 204, type: "英作文", hint: "私は泳ぎに行きたかったが、ほかの全員にその案を却下されてしまった。", exercise: "( I wanted to go swimming but ... the idea. )", answer: "I wanted to go swimming but the others rejected the idea.", fullExercise: "I wanted to go swimming but the others rejected the idea.", explanation: "複数あるうち1つを取り上げた後、残ったすべてを示す場合、the others 「(特定の)ほかの残り全部」を使います。" },
+            { id: 205, type: "英作文", hint: "私たちそれぞれが自らの仕事に責任がある。", exercise: "( ... is responsible for our own jobs. )", answer: "Each of us is responsible for our own jobs.", fullExercise: "Each of us is responsible for our own jobs.", explanation: "複数のうち「~のそれぞれ、~の1人1人」を表す場合、each (of)~ を使います。each は単数扱いです。" },
+
+            // Exercise 3: 英作文
+            { id: 301, sectionInstruction: "3. 次の日本語を英語に直しなさい。総合", type: "英作文", hint: "メンバー全員がステージに上がった。", exercise: "", answer: "All the members went on the stage.", accepts: ["All of the members went on the stage.", "All the members went on stage.", "All of the members went on stage."], fullExercise: "All the members went on the stage.", explanation: "3人以上の人のうち、それら全員を指す場合は all (of)~ 「~のすべて」を使います。所有格や the と共に使われる場合、all はそれらの前に置きます。" },
+            { id: 302, type: "英作文", hint: "その計画に賛成している人もいれば、反対している人もいる。", exercise: "", answer: "Some people are for the plan, and others are against it.", accepts: ["Some people are in favor of the plan, and others are opposed to it.", "Some people are for the plan, and others are opposed to it.", "Some people are in favor of the plan, and others are against it."], fullExercise: "Some people are for the plan, and others are against it.", explanation: "〈Some 〜, others ...〉「〜もいれば･･･もいる」を使います。be for~ / be in favor of~ 「~に賛成している」、be against ~ / be opposed to ~ 「~に反対している」" },
+            { id: 303, type: "英作文", hint: "彼の息子は2人とも彼の会社を引き継がないだろう。", exercise: "", answer: "Neither of his sons will take over his company.", fullExercise: "Neither of his sons will take over his company.", explanation: "2人のうち「どちらも〜ない」を表す場合、neither (of)~ を使います。take over 「引き継ぐ」" }
+        ];
+
+        // ==========================================
+        // Speech & Audio Utilities
+        // ==========================================
+        let availableVoices = [];
+        window.speechSynthesis.onvoiceschanged = () => {
+            availableVoices = window.speechSynthesis.getVoices();
+        };
+
+        function getEnglishVoice() {
+            if (availableVoices.length === 0) availableVoices = window.speechSynthesis.getVoices();
+            const preferred = ['Google US English', 'Google UK English Female', 'Samantha', 'Alex'];
+            for (const name of preferred) {
+                const voice = availableVoices.find(v => v.name === name);
+                if (voice) return voice;
+            }
+            return availableVoices.find(v => v.lang.startsWith('en-'));
+        }
+
+        window.playAudio = function(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85;
+                const voice = getEnglishVoice();
+                if (voice) utterance.voice = voice;
+                window.speechSynthesis.speak(utterance);
+            }
+        };
+
+        function calculatePronunciationScore(recognized, target) {
+            const normRec = recognized.toLowerCase().replace(/[^a-z0-9\s']/g, '').trim();
+            const normTgt = target.toLowerCase().replace(/[^a-z0-9\s']/g, '').trim();
+            if (normRec === normTgt) return 100;
+            const recWords = normRec.split(/\s+/).filter(w => w);
+            const tgtWords = normTgt.split(/\s+/).filter(w => w);
+            let matchCount = 0;
+            tgtWords.forEach(word => { if (recWords.includes(word)) matchCount++; });
+            const matchRatio = matchCount / tgtWords.length;
+            let score = 0;
+            if (matchRatio === 1) score = 95;
+            else if (matchRatio >= 0.8) score = 85;
+            else if (matchRatio >= 0.5) score = 70;
+            else if (matchRatio > 0) score = 50;
+            else score = 20;
+            return Math.min(score + (Math.floor(Math.random() * 5)), 100);
+        }
+
+        const recognitions = {};
+        window.startRecording = function(id, text, resultContainerId) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) return;
+            const btnText = document.getElementById(`mic-text-${id}`);
+            const btn = document.getElementById(`mic-btn-${id}`);
+            const resultDiv = document.getElementById(resultContainerId);
+            if(recognitions[id]) try { recognitions[id].stop(); } catch(e){}
+            const recognition = new SpeechRecognition();
+            recognitions[id] = recognition;
+            recognition.lang = 'en-US';
+            recognition.onstart = () => {
+                btnText.innerText = "録音中...";
+                btn.classList.replace('bg-emerald-500', 'bg-red-500');
+                btn.classList.add('animate-pulse');
+                resultDiv.innerHTML = '';
+            };
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                const score = calculatePronunciationScore(transcript, text);
+                resultDiv.innerHTML = `
+                    <div class="mt-2 border-t border-gray-200 pt-3 animate-in">
+                        <p class="text-base text-gray-600">あなたの発音: <span class="font-bold font-times text-lg">"${transcript}"</span></p>
+                        <div class="flex items-center mt-1">
+                            <span class="font-black text-2xl ${score >= 80 ? 'text-emerald-600' : 'text-orange-500'}">${score}点</span>
+                            <span class="ml-2 text-sm font-bold text-gray-400">/ 100</span>
+                        </div>
+                    </div>`;
+            };
+            recognition.onend = () => {
+                btnText.innerText = "発音する";
+                btn.classList.replace('bg-red-500', 'bg-emerald-500');
+                btn.classList.remove('animate-pulse');
+            };
+            recognition.start();
+        };
+
+        // ==========================================
+        // UI Rendering Logic
+        // ==========================================
+        function createPronunciationUI(id, textToRead) {
+            const escapedText = textToRead.replace(/'/g, "\\'");
+            return `
+                <div class="flex flex-col space-y-3 mt-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <button onclick="playAudio('${escapedText}')" class="flex items-center space-x-1 px-4 py-2 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition text-sm font-bold shadow-sm">
+                            <i class="ph ph-speaker-high text-lg"></i> <span>お手本</span>
+                        </button>
+                        <button id="mic-btn-${id}" onclick="startRecording('${id}', '${escapedText}', 'result-${id}')" class="flex items-center space-x-1 px-4 py-2 bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition text-sm font-bold shadow-sm">
+                            <i class="ph ph-microphone text-lg"></i> <span id="mic-text-${id}">発音する</span>
+                        </button>
+                    </div>
+                    <div id="result-${id}"></div>
+                </div>`;
+        }
+
+        function renderExamples() {
+            const container = document.getElementById('examples-container');
+            const grouped = {};
+            examplesData.forEach(item => {
+                if (!grouped[item.category]) grouped[item.category] = [];
+                grouped[item.category].push(item);
+            });
+            let html = '';
+            for (const [cat, items] of Object.entries(grouped)) {
+                html += `<h2 class="text-xl md:text-2xl font-bold text-[#1e3a8a] border-b-2 border-blue-200 pb-2 mt-10 mb-5">${cat}</h2>`;
+                items.forEach(item => {
+                    html += `
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-5 hover:shadow-md transition">
+                            <div class="flex items-start justify-between border-b border-gray-50 pb-4 mb-4">
+                                <div>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-[#1e3a8a] font-times">${item.verb}</h3>
+                                    <p class="text-gray-700 font-medium text-lg mt-1">${item.meaning}</p>
+                                </div>
+                            </div>
+                            <p class="text-2xl md:text-3xl font-medium text-gray-800 font-times leading-relaxed">${item.example}</p>
+                            
+                            ${item.explanation ? `
+                            <div class="mt-5 bg-blue-50/50 p-4 md:p-5 rounded-lg border border-blue-100 text-base md:text-lg text-gray-800 leading-relaxed font-medium">
+                                <div class="flex items-start">
+                                    <i class="ph-fill ph-lightbulb text-blue-400 mr-2 mt-1 text-xl"></i> 
+                                    <div>${item.explanation}</div>
+                                </div>
+                            </div>
+                            ` : ''}
+
+                            ${createPronunciationUI(`ex-${item.id}`, item.example)}
+                        </div>`;
+                });
+            }
+            container.innerHTML = html;
+        }
+
+        function renderExercises() {
+            const container = document.getElementById('exercises-container');
+            let html = '';
+            
+            exercisesData.forEach((item, idx) => {
+                // Section Instruction
+                if (item.sectionInstruction) {
+                    html += `
+                        <div class="mt-10 mb-5">
+                            <h3 class="text-xl md:text-2xl font-bold text-[#1e3a8a] border-b-2 border-blue-200 pb-2">${item.sectionInstruction}</h3>
+                        </div>
+                    `;
+                }
+
+                let questionHtml = '';
+                if (item.type === "穴埋め") {
+                    const placeholders = item.answer.split(' / ');
+                    let tempExercise = item.exercise;
+                    placeholders.forEach((_, pIdx) => {
+                        tempExercise = tempExercise.replace("(     )", `<input type="text" id="input-${item.id}-${pIdx}" class="mx-1 border-b-2 border-blue-600 bg-blue-50/50 text-center font-bold text-blue-800 text-xl outline-none w-28 md:w-32 font-times" autocomplete="off">`);
+                    });
+                    questionHtml = `<div class="text-xl md:text-2xl font-times font-medium text-gray-700 mb-6 leading-relaxed">${tempExercise}</div>`;
+                } else {
+                    let exerciseTextHtml = item.exercise ? `<div class="mb-4 text-gray-700 text-xl md:text-2xl font-medium font-times leading-relaxed">${item.exercise}</div>` : '';
+                    questionHtml = `
+                        ${exerciseTextHtml}
+                        <input type="text" id="input-${item.id}" class="w-full border-b-2 border-blue-600 bg-blue-50/50 p-3 font-bold text-blue-800 font-times text-xl outline-none" placeholder="解答を入力" autocomplete="off">
+                    `;
+                }
+
+                // Hint (日本語訳など)
+                let hintHtml = item.hint ? `<p class="text-base md:text-lg font-bold text-gray-600 mb-5 flex items-start"><i class="ph ph-translate-text mr-2 mt-1 text-blue-500 text-xl flex-shrink-0"></i> <span>${item.hint}</span></p>` : '';
+
+                html += `
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8 mb-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-[#1e3a8a] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Exercise ${idx + 1}</span>
+                        </div>
+                        
+                        ${hintHtml}
+                        <div id="q-area-${item.id}">${questionHtml}</div>
+                        
+                        <button id="btn-${item.id}" onclick="toggleAnswer(${item.id})" class="mt-6 w-full md:w-auto bg-[#1e3a8a] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#1e40af] transition shadow-md text-base">
+                            答え合わせ / 解答を見る
+                        </button>
+
+                        <div id="ans-panel-${item.id}" class="hidden-content mt-6 bg-blue-50 rounded-xl border border-blue-100 p-6">
+                            <div id="judge-${item.id}" class="text-2xl font-bold font-times flex items-center"></div>
+                            <div class="mb-5">
+                                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest block mb-1">Correct Answer</span>
+                                <p class="text-3xl font-bold text-blue-800 font-times">${item.answer}</p>
+                            </div>
+                            <div class="bg-white p-5 rounded-lg border border-blue-100 mb-5 text-base md:text-lg text-gray-800 leading-relaxed font-medium">
+                                <div class="flex items-start">
+                                    <i class="ph-fill ph-lightbulb text-blue-400 mr-2 mt-1 text-xl"></i> 
+                                    <div>${item.explanation}</div>
+                                </div>
+                            </div>
+                            ${createPronunciationUI(`ex-prac-${item.id}`, item.fullExercise)}
+                        </div>
+                    </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // Interaction Logic
+        // ==========================================
+        window.answerStates = {};
+        window.toggleAnswer = function(id) {
+            const isShowing = window.answerStates[id] || false;
+            const panel = document.getElementById(`ans-panel-${id}`);
+            const btn = document.getElementById(`btn-${id}`);
+            const item = exercisesData.find(ex => ex.id === id);
+            const judge = document.getElementById(`judge-${id}`);
+
+            if (!isShowing) {
+                // Check Answer
+                let userVal = "";
+                if (item.type === "穴埋め") {
+                    const inputs = document.querySelectorAll(`[id^="input-${id}-"]`);
+                    userVal = Array.from(inputs).map(i => i.value.trim()).join(' / ');
+                    // すべての入力欄が空の場合は空文字として扱う
+                    if (userVal.replace(/ \/ /g, '') === "") userVal = "";
+                } else {
+                    userVal = document.getElementById(`input-${id}`).value.trim();
+                }
+
+                // 「×」や「X」を入力しても小文字の「x」として判定できるように正規化処理
+                const normalize = s => s.toLowerCase().replace(/[\s\.\,\?\!]/g, '').replace(/×/g, 'x');
+                
+                // 代表的な解答と一致するか、または許容される別解(accepts)と一致するかチェック
+                let isCorrect = normalize(userVal) === normalize(item.answer);
+                if (!isCorrect && item.accepts) {
+                    isCorrect = item.accepts.some(ans => normalize(userVal) === normalize(ans));
+                }
+
+                if (userVal === "") {
+                    judge.innerHTML = "";
+                    judge.classList.remove("mb-5"); // 余白を詰める
+                } else if (isCorrect) {
+                    judge.innerHTML = `<span class="text-emerald-500 flex items-center"><i class="ph-fill ph-check-circle mr-2"></i> Perfect!</span>`;
+                    judge.classList.add("mb-5");
+                } else {
+                    judge.innerHTML = `<div class="flex flex-col"><span class="text-red-500 flex items-center"><i class="ph-fill ph-x-circle mr-2"></i> Not quite...</span> <span class="text-sm text-gray-500 block mt-1 font-sans font-normal">You entered: ${userVal}</span></div>`;
+                    judge.classList.add("mb-5");
+                }
+
+                panel.classList.remove('hidden-content');
+                panel.classList.add('animate-in');
+                btn.innerText = "解答を隠す";
+                btn.classList.replace('bg-[#1e3a8a]', 'bg-gray-400');
+                window.answerStates[id] = true;
+            } else {
+                panel.classList.add('hidden-content');
+                btn.innerText = "答え合わせ / 解答を見る";
+                btn.classList.replace('bg-gray-400', 'bg-[#1e3a8a]');
+                window.answerStates[id] = false;
+            }
+        };
+
+        window.switchTab = function(name) {
+            document.getElementById('view-examples').className = name === 'examples' ? 'active-tab animate-in' : 'hidden-tab';
+            document.getElementById('view-exercises').className = name === 'exercises' ? 'active-tab animate-in' : 'hidden-tab';
+            const eb = document.getElementById('tab-btn-examples'), xb = document.getElementById('tab-btn-exercises');
+            const active = ['bg-[#1e3a8a]', 'text-white', 'shadow-md'], inactive = ['text-gray-500', 'hover:bg-[#f0f4f9]'];
+            if (name === 'examples') { eb.classList.add(...active); eb.classList.remove(...inactive); xb.classList.remove(...active); xb.classList.add(...inactive); }
+            else { xb.classList.add(...active); xb.classList.remove(...inactive); eb.classList.remove(...active); eb.classList.add(...inactive); }
+        };
+
+        window.onload = () => { renderExamples(); renderExercises(); };
+    </script>
+</body>
+</html>
